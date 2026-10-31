@@ -1,0 +1,54 @@
+{
+  "_comment": "Ungated bootstrap rounds to initialize a network before candidate evaluation.",
+  "output_root": "artifacts/warmup/default",
+  "cargo_release": true,
+  "bootstrap_selfplay": {
+    "output_name": "bootstrap_selfplay.jsonl",
+    "games": 32,
+    "simulations": 64,
+    "threads": 2,
+    "c_puct": 1.35,
+    "temperature_plies": 8,
+    "temperature": 1.0,
+    "root_dirichlet_alpha_numerator": 8.0,
+    "root_exploration_fraction": 0.25,
+    "seed": 42
+  },
+  "training": {
+    "config": "configs/training.json",
+    "feature_layout_version": "height_buckets_v2",
+    "output_dir_name": "candidate_training",
+    "export_dir_name": "candidate_export",
+    "checkpoint_name": "best.pt",
+    "manifest_name": "teacher_resnet_onnx.json",
+    "epochs": 4,
+    "warm_start_epochs": 2,
+    "batch_size": 64,
+    "learning_rate": 0.0008,
+    "warm_start_learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "log_every_batches": 10,
+    "device": "cpu",
+    "execution_provider": "cpu",
+    "num_workers": 0
+  },
+  "warmup": {
+    "rounds": 3,
+    "accumulate_datasets": true,
+    "replay_window": 4,
+    "replay_decay": 0.95,
+    "generate_selfplay_after_last_round": false,
+    "selfplay": {
+      "output_name": "selfplay.jsonl",
+      "games": 32,
+      "simulations": 64,
+      "threads": 2,
+      "c_puct": 1.35,
+      "temperature_plies": 8,
+      "temperature": 1.0,
+      "root_dirichlet_alpha_numerator": 8.0,
+      "root_exploration_fraction": 0.25,
+      "seed": 43
+    }
+  }
+}

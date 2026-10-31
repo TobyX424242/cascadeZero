@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cascade-zero"
+version = "0.1.0"
+description = "Policy-value network training and ONNX export for the CascadeZero game agent"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "TobyX424242"}]
+dependencies = [
+    "numpy>=1.26,<3",
+    "torch>=2.2,<3",
+]
+
+[project.optional-dependencies]
+export = [
+    "onnx>=1.16,<2",
+    "onnxscript>=0.1,<1",
+    "onnxruntime>=1.18,<2",
+]
+
+[project.urls]
+Repository = "https://github.com/TobyX424242/cascadeZero"
+
+[tool.setuptools.packages.find]
+where = ["python"]

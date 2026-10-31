@@ -1,0 +1,18 @@
+[package]
+name = "cascade_data"
+version = "0.1.0"
+edition = "2021"
+description = "AlphaZero-inspired Cascade agent with Rust MCTS, self-play, and ONNX policy-value inference"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/TobyX424242/cascadeZero"
+
+[dependencies]
+libm = "0.2"
+ort = { version = "=2.0.0-rc.6", default-features = false, features = ["cuda", "rocm", "load-dynamic"] }
+ort-sys = { version = "=2.0.0-rc.6", default-features = false }
+rayon = "=1.10.0"
+rayon-core = "=1.12.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"

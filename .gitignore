@@ -1,0 +1,43 @@
+# Build output and Python environments
+/target/
+/build/
+/dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Generated datasets, models, reports, and training logs
+/artifacts/
+/data/
+/runs/
+/wandb/
+*.jsonl
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.onnx.data
+*.log
+
+# Local credentials, agent state, and editor settings
+.env
+.env.*
+!.env.example
+.aws/
+.ssh/
+.agents/
+.codex/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

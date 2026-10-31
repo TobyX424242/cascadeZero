@@ -1,0 +1,92 @@
+{
+  "_comment": "Gated iteration with a rolling pool of accepted historical models. An empty initial pool is skipped.",
+  "output_root": "artifacts/iterations/leagueplay",
+  "cargo_release": true,
+  "bootstrap_selfplay": {
+    "output_name": "bootstrap_selfplay.jsonl",
+    "games": 32,
+    "simulations": 64,
+    "threads": 2,
+    "c_puct": 1.35,
+    "temperature_plies": 8,
+    "temperature": 1.0,
+    "root_dirichlet_alpha_numerator": 8.0,
+    "root_exploration_fraction": 0.25,
+    "seed": 42
+  },
+  "training": {
+    "config": "configs/training.json",
+    "feature_layout_version": "height_buckets_v2",
+    "output_dir_name": "candidate_training",
+    "export_dir_name": "candidate_export",
+    "checkpoint_name": "best.pt",
+    "manifest_name": "teacher_resnet_onnx.json",
+    "epochs": 4,
+    "warm_start_epochs": 2,
+    "batch_size": 64,
+    "learning_rate": 0.0008,
+    "warm_start_learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "log_every_batches": 10,
+    "device": "cpu",
+    "execution_provider": "cpu",
+    "num_workers": 0
+  },
+  "arena": {
+    "report_name": "arena_report.json",
+    "baseline_name": "incumbent",
+    "candidate_name": "candidate",
+    "games": 20,
+    "simulations": 64,
+    "threads": 2,
+    "c_puct": 1.35,
+    "seed": 42,
+    "opening_temperature_plies": 4,
+    "opening_temperature": 0.8
+  },
+  "gating": {
+    "_comment": "Score is (wins + 0.5 * draws) / games, not win rate.",
+    "min_candidate_score": 0.55,
+    "min_candidate_wins": 1
+  },
+  "next_selfplay_on_accept": {
+    "output_name": "accepted_selfplay.jsonl",
+    "games": 32,
+    "simulations": 64,
+    "threads": 2,
+    "c_puct": 1.35,
+    "temperature_plies": 8,
+    "temperature": 1.0,
+    "root_dirichlet_alpha_numerator": 8.0,
+    "root_exploration_fraction": 0.25,
+    "seed": 43,
+    "enabled": true
+  },
+  "iteration": {
+    "rounds": 3,
+    "max_consecutive_rejections": 3,
+    "accumulate_datasets": true,
+    "replay_window": 4,
+    "replay_decay": 0.95,
+    "generate_selfplay_on_rejection": true,
+    "prune_expired_datasets": false
+  },
+  "next_leagueplay_on_accept": {
+    "output_name": "leagueplay.jsonl",
+    "games": 32,
+    "simulations": 64,
+    "threads": 2,
+    "c_puct": 1.35,
+    "temperature_plies": 8,
+    "temperature": 1.0,
+    "root_dirichlet_alpha_numerator": 8.0,
+    "root_exploration_fraction": 0.25,
+    "seed": 44,
+    "enabled": true,
+    "report_name": "leagueplay_report.json",
+    "candidate_name": "candidate",
+    "window_size": 4,
+    "elite_models": [],
+    "record_league_moves": false
+  }
+}

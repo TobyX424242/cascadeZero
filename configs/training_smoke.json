@@ -1,0 +1,29 @@
+{
+  "_comment": "Tiny network for pipeline validation, not a playing-strength configuration.",
+  "dataset_paths": [
+    "artifacts/selfplay.jsonl"
+  ],
+  "output_dir": "artifacts/smoke/training",
+  "seed": 42,
+  "train_fraction": 0.9,
+  "batch_size": 16,
+  "epochs": 1,
+  "learning_rate": 0.0008,
+  "weight_decay": 0.0001,
+  "log_every_batches": 0,
+  "policy_loss_weight": 1.0,
+  "value_loss_weight": 0.6,
+  "device": "cpu",
+  "num_workers": 0,
+  "amp": false,
+  "channels_last": false,
+  "model": {
+    "feature_layout_version": "height_buckets_v2",
+    "channels": 16,
+    "residual_blocks": 1,
+    "policy_channels": 4,
+    "value_channels": 4,
+    "value_hidden_dim": 16,
+    "use_mhc": false
+  }
+}
